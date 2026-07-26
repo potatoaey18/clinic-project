@@ -690,4 +690,5 @@ function NewLabDialog({ patientId, clinicId, userId }: { patientId: string; clin
       </DialogContent>
     </Dialog>
   );
+  
 }
