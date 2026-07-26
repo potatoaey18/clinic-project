@@ -196,14 +196,77 @@ function PatientDetail() {
         </CardContent>
       </Card>
 
-      <Tabs defaultValue="timeline">
+      <Tabs defaultValue="overview">
         <TabsList className="h-9 rounded-md bg-muted p-0.5">
+          <TabsTrigger value="overview" className="rounded-sm text-xs">Overview</TabsTrigger>
           <TabsTrigger value="timeline" className="rounded-sm text-xs">Timeline</TabsTrigger>
           <TabsTrigger value="consults" className="rounded-sm text-xs">Consultations ({consultations.length})</TabsTrigger>
           <TabsTrigger value="rx" className="rounded-sm text-xs">Prescriptions ({prescriptions.length})</TabsTrigger>
           <TabsTrigger value="labs" className="rounded-sm text-xs">Lab results ({labs.length})</TabsTrigger>
           <TabsTrigger value="vitals" className="rounded-sm text-xs">Vitals ({vitals.length})</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="overview" className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-base">Identity & contact</CardTitle></CardHeader>
+              <CardContent className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                <Info label="Middle name" v={patient.middle_name} />
+                <Info label="Civil status" v={patient.civil_status} />
+                <Info label="Nationality" v={patient.nationality} />
+                <Info label="Occupation" v={patient.occupation} />
+                <Info label="Contact number" v={patient.contact_number} />
+                <Info label="Email" v={patient.email} />
+                <div className="col-span-2"><Info label="Address" v={patient.address} /></div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-base">IDs & insurance</CardTitle></CardHeader>
+              <CardContent className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                <Info label="PhilHealth" v={patient.philhealth_no} />
+                <Info label="Senior citizen ID" v={patient.senior_citizen_id} />
+                <Info label="PWD ID" v={patient.pwd_id} />
+                <Info label="Passport no." v={patient.passport_no} />
+                <Info label="Driver's license" v={patient.drivers_license_no} />
+                <Info label="Insurance provider" v={patient.insurance_provider} />
+                <Info label="Insurance policy no." v={patient.insurance_policy_no} />
+              </CardContent>
+            </Card>
+
+            <Card className="md:col-span-2">
+              <CardHeader className="pb-2"><CardTitle className="text-base">Medical history</CardTitle></CardHeader>
+              <CardContent className="grid gap-x-6 gap-y-3 text-sm md:grid-cols-2">
+                <Info label="Blood type" v={patient.blood_type} />
+                <Info label="Medical alerts" v={patient.medical_alerts} highlight />
+                <Info label="Allergies" v={patient.allergies} highlight />
+                <Info label="Existing conditions" v={patient.existing_conditions} />
+                <Info label="Current medications" v={patient.current_medications} />
+                <Info label="Family history" v={patient.family_history} />
+                <Info label="Surgical history" v={patient.surgical_history} />
+                <Info label="Smoking history" v={patient.smoking_history} />
+                <Info label="Alcohol history" v={patient.alcohol_history} />
+                <Info label="Pregnancy history" v={patient.pregnancy_history} />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-base">Emergency contact</CardTitle></CardHeader>
+              <CardContent className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                <Info label="Name" v={patient.emergency_contact_name} />
+                <Info label="Phone" v={patient.emergency_contact_phone} />
+                <Info label="Relationship" v={patient.emergency_contact_relation} />
+              </CardContent>
+            </Card>
+
+            {patient.notes && (
+              <Card>
+                <CardHeader className="pb-2"><CardTitle className="text-base">Notes</CardTitle></CardHeader>
+                <CardContent className="text-sm text-muted-foreground">{patient.notes}</CardContent>
+              </Card>
+            )}
+          </div>
+        </TabsContent>
 
         <TabsContent value="timeline">
           <Card>
